@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* Цвета взяты с печатного каталога предприятия: тёплая бумага, тёмно-зелёные
+   заголовки, песочный акцент. Сайт и буклет лежат рядом на одном столе
+   у заказчика — разные цвета читались бы как две разные фирмы.
+   Сырая палитра Tailwind (bg-green-700 и т.п.) отключена — только эти токены. */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-paper: #f6f4ef;
+  --color-surface: #ffffff;
+  --color-canvas: #f2ede4; /* фон под фото: в тон студийным кадрам каталога */
+  --color-ink: #1c3a32; /* заголовки, основная кнопка */
+  --color-ink-press: #142b25;
+  --color-text: #1f2a26;
+  --color-muted: #5b6862;
+  --color-faint: #8a928d;
+  --color-accent: #9c7a52;
+  --color-border: #e3ddd2;
+  --color-border-strong: #cdc5b7;
+  --color-night: #15302a; /* тёмный блок «новые направления» */
+  --color-night-line: #2b4a42;
+  --color-night-text: #e9e6df;
+  --color-night-muted: #a9b5ae;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif-4), ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Якорь не прячется под липкой шапкой. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Меню на телефоне — нативный <details>, без JavaScript: на старых
+   телефонах и медленном канале оно работает до загрузки скриптов. */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

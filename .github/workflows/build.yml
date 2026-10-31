@@ -1,0 +1,31 @@
+# Сборка сайта на каждый пуш: проверка типов, линтер, статическая выгрузка.
+# Готовая папка out/ уходит артефактом — её забирает сервер nebithi.gov.tm
+# (pull-деплой: сам сервер ходит в GitHub, к нему GitHub не достучится).
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: out/
+          retention-days: 90
