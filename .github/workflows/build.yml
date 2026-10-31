@@ -28,6 +28,8 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm build
+        env:
+          BUILD_SHA: ${{ github.sha }}
       # Артефакт для выката — только с main. Сборка чужого PR тоже даёт
       # out/, и сервер, взявший «последний артефакт», выкатил бы на gov.tm
       # непросмотренный код. Сервер обязан фильтровать event=push&branch=main.

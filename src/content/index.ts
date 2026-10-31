@@ -27,5 +27,8 @@ export function pageMetadata(lang: Lang): Metadata {
       images: [{ url: "/img/agp-heater-1600.webp" }],
       type: "website",
     },
+    // Метка сборки: по ней deploy/site.sh после выката проверяет, что
+    // отвечает именно новая версия, а не старая. CI подставляет коммит.
+    other: { "build-sha": process.env.BUILD_SHA ?? "local" },
   };
 }
