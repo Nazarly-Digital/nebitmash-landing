@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { inter, serif } from "@/app/fonts";
+import { inter } from "@/app/fonts";
 import type { Lang } from "@/content/types";
 import "@/app/globals.css";
 
@@ -8,7 +8,7 @@ import "@/app/globals.css";
 // поисковик и экранный диктор читают туркменский текст как английский.
 export function RootHtml({ lang, children }: { lang: Lang; children: ReactNode }) {
   return (
-    <html lang={lang} className={`${inter.variable} ${serif.variable}`}>
+    <html lang={lang} className={inter.variable}>
       <body className="font-sans">{children}</body>
     </html>
   );

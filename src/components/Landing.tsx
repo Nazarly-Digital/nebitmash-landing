@@ -30,51 +30,51 @@ export function Landing({ lang }: { lang: Lang }) {
 }
 
 function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`mx-auto max-w-6xl px-4 sm:px-6 ${className}`}>{children}</div>;
+  return <div className={`mx-auto max-w-7xl px-4 sm:px-6 ${className}`}>{children}</div>;
 }
 
-function SectionHead({ eyebrow, title, lead, dark }: { eyebrow: string; title: string; lead?: string; dark?: boolean }) {
+function SectionHead({ eyebrow, title, lead }: { eyebrow: string; title: string; lead?: string }) {
   return (
     <div className="max-w-2xl">
       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{eyebrow}</p>
-      <h2 className={`mt-3 font-serif text-3xl font-medium leading-tight sm:text-4xl ${dark ? "text-night-text" : "text-ink"}`}>
+      <h2 className={`mt-3 text-3xl font-bold leading-tight sm:text-4xl text-ink`}>
         {title}
       </h2>
-      {lead && <p className={`mt-4 text-base leading-relaxed ${dark ? "text-night-muted" : "text-muted"}`}>{lead}</p>}
+      {lead && <p className={`mt-4 text-base leading-relaxed text-muted`}>{lead}</p>}
     </div>
   );
 }
 
 function Hero({ d }: { d: Dict }) {
   return (
-    <section className="border-b border-border">
+    <section className="bg-surface shadow-card">
       <Container className="grid gap-10 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-14 lg:py-20">
         <div>
           <p className="text-sm leading-snug text-muted">{d.hero.ministry}</p>
           <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{d.hero.enterprise}</p>
-          <h1 className="mt-6 font-serif text-4xl font-medium leading-[1.08] text-ink sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-4xl font-bold leading-[1.1] text-ink sm:text-5xl lg:text-6xl">
             «Nebitmaş»
-            <span className="mt-2 block text-3xl text-text sm:text-4xl lg:text-[2.75rem]">{d.hero.title}</span>
+            <span className="mt-2 block text-3xl font-semibold text-text sm:text-4xl lg:text-[2.75rem]">{d.hero.title}</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">{d.hero.lead}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
               href="#products"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-ink px-6 text-base font-medium text-white transition-colors hover:bg-ink-press"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-ink px-6 text-base font-medium text-white transition-colors hover:bg-ink-press"
             >
               {d.hero.ctaProducts}
               <HugeiconsIcon icon={ArrowRight02Icon} size={18} />
             </a>
             <a
               href={`tel:${site.phone.tel}`}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-lg border border-border-strong px-6 text-base font-medium text-ink transition-colors hover:border-ink"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-border-strong px-6 text-base font-medium text-ink transition-colors hover:border-ink"
             >
               <HugeiconsIcon icon={Call02Icon} size={18} />
               {d.hero.ctaCall}
             </a>
           </div>
         </div>
-        <div className="relative aspect-[4/5] max-h-[560px] overflow-hidden rounded-xl bg-canvas lg:aspect-[3/4]">
+        <div className="relative aspect-[4/5] max-h-[560px] overflow-hidden rounded-md bg-canvas lg:aspect-[3/4]">
           <Picture img={{ name: "building" }} alt={d.hero.buildingAlt} sizes="(min-width: 1024px) 480px, 100vw" priority />
         </div>
       </Container>
@@ -88,7 +88,7 @@ function Hero({ d }: { d: Dict }) {
               } ${i === 2 ? "lg:border-l lg:pl-6" : ""} ${i > 0 ? "lg:pl-6" : ""}`}
             >
               <dt className="sr-only">{s.label}</dt>
-              <dd className="font-mono text-2xl font-semibold tabular-nums text-ink sm:text-3xl">{s.value}</dd>
+              <dd className="text-3xl font-bold tabular-nums text-ink">{s.value}</dd>
               <dd className="mt-1 text-sm text-muted">{s.label}</dd>
             </div>
           ))}
@@ -100,14 +100,14 @@ function Hero({ d }: { d: Dict }) {
 
 function President({ d }: { d: Dict }) {
   return (
-    <section className="border-b border-border bg-surface">
+    <section>
       <Container className="flex items-center gap-5 py-6 sm:gap-6">
         <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-md bg-canvas sm:h-28 sm:w-24">
           <Picture img={{ name: "president" }} alt={`${d.president.role} ${d.president.name}`} sizes="96px" />
         </div>
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{d.president.role}</p>
-          <p className="mt-2 font-serif text-xl font-medium text-ink sm:text-2xl">{d.president.name}</p>
+          <p className="mt-2 text-xl font-semibold text-text sm:text-2xl">{d.president.name}</p>
         </div>
       </Container>
     </section>
@@ -137,9 +137,9 @@ function Products({ d, lang }: { d: Dict; lang: Lang }) {
         <div className="mt-12 space-y-16">
           {groups.map((g) => (
             <div key={g.id} id={`group-${g.id}`}>
-              <h3 className="flex items-baseline gap-3 border-b border-border pb-3 font-serif text-2xl font-medium text-ink">
+              <h3 className="flex items-baseline gap-3 border-b border-border pb-3 text-2xl font-bold text-ink">
                 {d.products.groups[g.id]}
-                <span className="font-mono text-sm text-faint">{String(g.products.length).padStart(2, "0")}</span>
+                <span className="text-sm font-medium text-faint">{String(g.products.length).padStart(2, "0")}</span>
               </h3>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {g.products.map((id) => (
@@ -161,13 +161,13 @@ function ProductCard({ id, d, lang }: { id: ProductId; d: Dict; lang: Lang }) {
   const customer = p.madeFor ? d.customers.items[customerKeys.indexOf(p.madeFor)]?.name : undefined;
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-surface">
+    <article className="flex flex-col overflow-hidden rounded-md bg-surface shadow-card">
       <div className="relative aspect-[4/3] bg-canvas">
         <Picture img={p.img} alt={t.title} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" />
       </div>
       <div className="flex flex-1 flex-col p-5">
         <p className="text-xs font-medium text-accent">{t.subtitle}</p>
-        <h4 className="mt-1.5 font-serif text-xl font-medium leading-snug text-ink">{t.title}</h4>
+        <h4 className="mt-1.5 text-lg font-semibold leading-snug text-text">{t.title}</h4>
         <p className="mt-2 text-sm leading-relaxed text-muted">{t.text}</p>
 
         <dl className="mt-4 space-y-3 border-t border-border pt-4">
@@ -184,7 +184,7 @@ function ProductCard({ id, d, lang }: { id: ProductId; d: Dict; lang: Lang }) {
             {models && (
               <ul className="flex flex-wrap gap-1.5" aria-label={d.products.modelsLabel}>
                 {models.map((m) => (
-                  <li key={m} className="rounded-md border border-border bg-paper px-2 py-1 font-mono text-xs tabular-nums text-text">
+                  <li key={m} className="rounded-full bg-tint px-2.5 py-1 text-xs font-medium tabular-nums text-text">
                     {m}
                   </li>
                 ))}
@@ -204,17 +204,17 @@ function ProductCard({ id, d, lang }: { id: ProductId; d: Dict; lang: Lang }) {
 
 function Customers({ d }: { d: Dict }) {
   return (
-    <section id="customers" className="border-y border-border bg-surface py-16 sm:py-20">
+    <section id="customers" className="py-16 sm:py-20">
       <Container>
         <SectionHead eyebrow={d.customers.eyebrow} title={d.customers.title} lead={d.customers.lead} />
         <ul className="mt-10 grid gap-6 md:grid-cols-3">
           {d.customers.items.map((c, i) => (
-            <li key={c.name} className="overflow-hidden rounded-xl border border-border bg-paper">
+            <li key={c.name} className="overflow-hidden rounded-md bg-surface shadow-card">
               <div className="relative aspect-[16/10] bg-canvas">
                 <Picture img={customerImages[customerKeys[i]]} alt="" sizes="(min-width: 768px) 360px, 100vw" />
               </div>
               <div className="p-5">
-                <h3 className="font-serif text-xl font-medium leading-snug text-ink">{c.name}</h3>
+                <h3 className="text-lg font-semibold leading-snug text-text">{c.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{c.text}</p>
               </div>
             </li>
@@ -234,13 +234,13 @@ function Quality({ d }: { d: Dict }) {
           <ul className="mt-8 space-y-6">
             {d.quality.items.map((q) => (
               <li key={q.title} className="border-l-2 border-accent pl-5">
-                <h3 className="font-serif text-lg font-medium text-ink">{q.title}</h3>
+                <h3 className="text-base font-semibold text-text">{q.title}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-muted">{q.text}</p>
               </li>
             ))}
           </ul>
         </div>
-        <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-canvas">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-canvas">
           <Picture img={{ name: "switching" }} alt="" sizes="(min-width: 1024px) 540px, 100vw" />
         </div>
       </Container>
@@ -250,14 +250,14 @@ function Quality({ d }: { d: Dict }) {
 
 function Order({ d }: { d: Dict }) {
   return (
-    <section id="order" className="border-t border-border bg-surface py-16 sm:py-20">
+    <section id="order" className="py-16 sm:py-20">
       <Container>
         <SectionHead eyebrow={d.order.eyebrow} title={d.order.title} lead={d.order.lead} />
         <ol className="mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
           {d.order.steps.map((s, i) => (
             <li key={s.title} className="border-t border-border-strong pt-5">
-              <span className="font-serif text-4xl text-accent">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-3 font-serif text-xl font-medium text-ink">{s.title}</h3>
+              <span className="text-4xl font-bold text-ink">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-3 text-lg font-semibold text-text">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{s.text}</p>
             </li>
           ))}
@@ -267,16 +267,16 @@ function Order({ d }: { d: Dict }) {
   );
 }
 
-// Тёмный фон и метка «рассматривается» — намеренно: это НЕ ассортимент.
+// Свой фон и метка «рассматривается» — намеренно: это НЕ ассортимент.
 // Если смешать с карточками выше, заказчик позвонит за автоклавом, которого
 // завод ещё не делает (так и записано в каталоге — «отдельно от текущего»).
 function Future({ d }: { d: Dict }) {
   return (
-    <section id="future" className="bg-night py-16 text-night-text sm:py-20">
+    <section id="future" className="bg-tint py-16 sm:py-20">
       <Container>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <SectionHead eyebrow={d.future.eyebrow} title={d.future.title} lead={d.future.lead} dark />
-          <span className="inline-flex h-8 w-fit shrink-0 items-center rounded-full border border-night-line px-3 text-xs font-medium text-night-muted">
+          <SectionHead eyebrow={d.future.eyebrow} title={d.future.title} lead={d.future.lead} />
+          <span className="inline-flex h-8 w-fit shrink-0 items-center rounded-full bg-ink px-3 text-xs font-semibold text-white">
             {d.future.badge}
           </span>
         </div>
@@ -284,20 +284,20 @@ function Future({ d }: { d: Dict }) {
           {future.map((f) => {
             const t = d.future.items[f.id];
             return (
-              <li key={f.id} className="overflow-hidden rounded-xl border border-night-line">
+              <li key={f.id} className="overflow-hidden rounded-md bg-surface text-text shadow-card">
                 <div className="relative aspect-[3/2] bg-canvas">
                   <Picture img={f.img} alt={t.title} sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" />
                 </div>
                 <div className="p-5">
-                  <p className="text-xs font-medium text-night-muted">{t.subtitle}</p>
-                  <h3 className="mt-1.5 font-serif text-lg font-medium">{t.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-night-muted">{t.text}</p>
+                  <p className="text-xs font-medium text-accent">{t.subtitle}</p>
+                  <h3 className="mt-1.5 text-base font-semibold text-text">{t.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{t.text}</p>
                 </div>
               </li>
             );
           })}
         </ul>
-        <p className="mt-8 max-w-3xl text-xs leading-relaxed text-night-muted">{d.future.note}</p>
+        <p className="mt-8 max-w-3xl text-xs leading-relaxed text-muted">{d.future.note}</p>
       </Container>
     </section>
   );
@@ -308,14 +308,14 @@ function Contacts({ d }: { d: Dict }) {
     <section id="contacts" className="py-16 sm:py-20">
       <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
         <SectionHead eyebrow={d.contacts.eyebrow} title={d.contacts.title} lead={d.contacts.lead} />
-        <div className="divide-y divide-border rounded-xl border border-border bg-surface">
+        <div className="divide-y divide-border rounded-md bg-surface shadow-card">
           <ContactRow icon={Call02Icon} label={d.contacts.phoneLabel}>
-            <a href={`tel:${site.phone.tel}`} className="font-mono text-2xl tabular-nums text-ink hover:underline sm:text-3xl">
+            <a href={`tel:${site.phone.tel}`} className="text-2xl font-bold tabular-nums text-ink hover:underline sm:text-3xl">
               {site.phone.display}
             </a>
           </ContactRow>
           <ContactRow icon={PrinterIcon} label={d.contacts.faxLabel}>
-            <span className="font-mono text-xl tabular-nums text-text">{site.fax}</span>
+            <span className="text-xl font-semibold tabular-nums text-text">{site.fax}</span>
           </ContactRow>
           <ContactRow icon={Location01Icon} label={d.contacts.addressLabel}>
             <address className="text-base not-italic leading-relaxed text-text">
@@ -343,7 +343,7 @@ function ContactRow({
 }) {
   return (
     <div className="flex gap-4 p-5 sm:p-6">
-      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-paper text-ink">
+      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-tint text-ink">
         <HugeiconsIcon icon={icon} size={20} />
       </span>
       <div>
@@ -356,14 +356,14 @@ function ContactRow({
 
 function Footer({ d, lang }: { d: Dict; lang: Lang }) {
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="bg-ink text-white">
       <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-start sm:justify-between">
         <div className="max-w-xl">
-          <p className="font-serif text-lg font-semibold tracking-wide text-ink">NEBITMAŞ</p>
-          <p className="mt-1 text-sm text-muted">© {new Date().getFullYear()} {d.footer.rights}</p>
-          <p className="mt-4 text-xs leading-relaxed text-faint">{d.footer.illustrations}</p>
+          <p className="text-lg font-bold tracking-wide text-white">NEBITMAŞ</p>
+          <p className="mt-1 text-sm text-white/80">© {new Date().getFullYear()} {d.footer.rights}</p>
+          <p className="mt-4 text-xs leading-relaxed text-white/70">{d.footer.illustrations}</p>
         </div>
-        <LangSwitch lang={lang} />
+        <LangSwitch lang={lang} onDark />
       </Container>
     </footer>
   );

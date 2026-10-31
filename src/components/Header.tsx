@@ -15,14 +15,14 @@ export function Header({ d, lang }: { d: Dict; lang: Lang }) {
   const home = langs.find((l) => l.id === lang)?.href ?? "/";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-4 sm:px-6">
         <a href={home} className="flex flex-col leading-none" aria-label="Nebitmaş">
-          <span className="font-serif text-xl font-semibold tracking-wide text-ink">NEBITMAŞ</span>
-          <span className="mt-1 text-[11px] text-faint">{d.hero.enterprise}</span>
+          <span className="text-xl font-bold tracking-wide text-ink">NEBITMAŞ</span>
+          <span className="mt-1 whitespace-nowrap text-[11px] text-faint">{d.hero.enterprise}</span>
         </a>
 
-        <nav className="ml-auto hidden items-center gap-5 text-sm font-medium text-muted lg:flex">
+        <nav className="ml-auto hidden items-center gap-5 whitespace-nowrap text-sm font-medium text-muted xl:flex">
           {links.map((l) => (
             <a key={l.href} href={l.href} className="transition-colors hover:text-ink">
               {l.label}
@@ -30,25 +30,25 @@ export function Header({ d, lang }: { d: Dict; lang: Lang }) {
           ))}
         </nav>
 
-        <div className="ml-auto flex items-center gap-2 lg:ml-0">
+        <div className="ml-auto flex items-center gap-2 xl:ml-0">
           <LangSwitch lang={lang} />
           <a
             href={`tel:${site.phone.tel}`}
-            className="hidden h-10 items-center gap-2 rounded-lg bg-ink px-4 text-sm font-medium text-white transition-colors hover:bg-ink-press sm:inline-flex"
+            className="hidden h-10 items-center gap-2 whitespace-nowrap rounded-full bg-ink px-4 text-sm font-medium text-white transition-colors hover:bg-ink-press sm:inline-flex"
           >
             <HugeiconsIcon icon={Call02Icon} size={16} />
             {site.phone.display}
           </a>
 
-          <details className="group lg:hidden">
+          <details className="group xl:hidden">
             <summary
-              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border border-border-strong text-ink"
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border-strong bg-surface text-ink"
               aria-label={d.nav.menu}
             >
               <HugeiconsIcon icon={Menu01Icon} size={20} className="group-open:hidden" />
               <HugeiconsIcon icon={Cancel01Icon} size={20} className="hidden group-open:block" />
             </summary>
-            <div className="absolute inset-x-0 top-16 border-b border-border bg-paper px-4 pb-6 pt-2 shadow-sm sm:px-6">
+            <div className="absolute inset-x-0 top-16 border-b border-border bg-surface px-4 pb-6 pt-2 shadow-sm sm:px-6">
               <nav className="flex flex-col">
                 {links.map((l) => (
                   <a
@@ -62,7 +62,7 @@ export function Header({ d, lang }: { d: Dict; lang: Lang }) {
               </nav>
               <a
                 href={`tel:${site.phone.tel}`}
-                className="mt-4 flex h-12 items-center justify-center gap-2 rounded-lg bg-ink text-base font-medium text-white"
+                className="mt-4 flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-base font-medium text-white"
               >
                 <HugeiconsIcon icon={Call02Icon} size={18} />
                 {site.phone.display}
@@ -75,22 +75,30 @@ export function Header({ d, lang }: { d: Dict; lang: Lang }) {
   );
 }
 
-export function LangSwitch({ lang }: { lang: Lang }) {
+export function LangSwitch({ lang, onDark }: { lang: Lang; onDark?: boolean }) {
   return (
-    <div className="flex h-10 items-center rounded-lg border border-border-strong p-0.5 text-xs font-semibold">
-      {langs.map((l) => (
-        <a
-          key={l.id}
-          href={l.href}
-          hrefLang={l.id}
-          aria-current={l.id === lang ? "page" : undefined}
-          className={`flex h-full items-center rounded-md px-2.5 transition-colors ${
-            l.id === lang ? "bg-ink text-white" : "text-muted hover:text-ink"
-          }`}
-        >
-          {l.label}
-        </a>
-      ))}
+    <div
+      className={`flex h-10 items-center rounded-full border p-0.5 text-xs font-semibold ${
+        onDark ? "border-white/40" : "border-border-strong bg-surface"
+      }`}
+    >
+      {langs.map((l) => {
+        const active = l.id === lang;
+        const tone = onDark
+          ? active ? "bg-white text-ink" : "text-white/80 hover:text-white"
+          : active ? "bg-ink text-white" : "text-muted hover:text-ink";
+        return (
+          <a
+            key={l.id}
+            href={l.href}
+            hrefLang={l.id}
+            aria-current={active ? "page" : undefined}
+            className={`flex h-full items-center rounded-full px-3 transition-colors ${tone}`}
+          >
+            {l.label}
+          </a>
+        );
+      })}
     </div>
   );
 }

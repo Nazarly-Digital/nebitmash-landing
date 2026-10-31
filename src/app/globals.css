@@ -1,31 +1,28 @@
 @import "tailwindcss";
 
-/* Цвета взяты с печатного каталога предприятия: тёплая бумага, тёмно-зелёные
-   заголовки, песочный акцент. Сайт и буклет лежат рядом на одном столе
-   у заказчика — разные цвета читались бы как две разные фирмы.
-   Сырая палитра Tailwind (bg-green-700 и т.п.) отключена — только эти токены. */
+/* Цвета и шрифт — как на gov.kz (просьба 2026-10-31: «их шрифт нравится,
+   и цвета тоже»): серый фон, белые карточки с мягкой синеватой тенью,
+   синий #4053D4 на заголовках, кнопках и подвале, Inter без засечек.
+   Сырая палитра Tailwind (bg-blue-600 и т.п.) отключена — только эти токены. */
 @theme {
   --color-*: initial;
   --color-white: #ffffff;
-  --color-paper: #f6f4ef;
-  --color-surface: #ffffff;
-  --color-canvas: #f2ede4; /* фон под фото: в тон студийным кадрам каталога */
-  --color-ink: #1c3a32; /* заголовки, основная кнопка */
-  --color-ink-press: #142b25;
-  --color-text: #1f2a26;
-  --color-muted: #5b6862;
-  --color-faint: #8a928d;
-  --color-accent: #9c7a52;
-  --color-border: #e3ddd2;
-  --color-border-strong: #cdc5b7;
-  --color-night: #15302a; /* тёмный блок «новые направления» */
-  --color-night-line: #2b4a42;
-  --color-night-text: #e9e6df;
-  --color-night-muted: #a9b5ae;
+  --color-paper: #f4f4f4; /* фон страницы */
+  --color-surface: #ffffff; /* карточки, шапка */
+  --color-canvas: #f2f4f8; /* фон под фото, если кадр не на весь блок */
+  --color-tint: #e8ebfa; /* блок «новые направления», подложка меток */
+  --color-ink: #4053d4; /* синий: заголовки разделов, кнопки, подвал */
+  --color-ink-press: #3343b8;
+  --color-text: #1f1f1f;
+  --color-muted: #606060;
+  --color-faint: #808080;
+  --color-accent: #4053d4;
+  --color-border: #e5e7eb;
+  --color-border-strong: #cdd1eb;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-serif-4), ui-serif, Georgia, serif;
-  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --shadow-card: 0 2.4px 5.3px 0 rgb(15 26 146 / 0.05);
 }
 
 html {
