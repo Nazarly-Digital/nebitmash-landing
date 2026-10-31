@@ -110,8 +110,9 @@ export const future: { id: FutureId; img: Img }[] = [
   { id: "workwear", img: { name: "workwear" } },
 ];
 
-export const langs: { id: Lang; label: string; href: string }[] = [
-  { id: "tk", label: "TM", href: "/" },
-  { id: "ru", label: "RU", href: "/ru/" },
-  { id: "en", label: "EN", href: "/en/" },
+// Название языка — на нём самом: человек ищет «Русский», а не «Rusça».
+export const langs: { id: Lang; label: string; name: string; href: string }[] = [
+  { id: "tk", label: "TM", name: "Türkmençe", href: "/" },
+  { id: "ru", label: "RU", name: "Русский", href: "/ru/" },
+  { id: "en", label: "EN", name: "English", href: "/en/" },
 ];

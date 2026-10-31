@@ -1,5 +1,5 @@
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Call02Icon, Cancel01Icon, Menu01Icon } from "@hugeicons/core-free-icons";
+import { ArrowDown01Icon, Call02Icon, Cancel01Icon, GlobeIcon, Menu01Icon } from "@hugeicons/core-free-icons";
 import { langs, site } from "@/content/catalog";
 import type { Dict, Lang } from "@/content/types";
 
@@ -40,7 +40,7 @@ export function Header({ d, lang }: { d: Dict; lang: Lang }) {
             {site.phone.display}
           </a>
 
-          <details className="group xl:hidden">
+          <details className="group xl:hidden" data-dropdown>
             <summary
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border-strong bg-surface text-ink"
               aria-label={d.nav.menu}
@@ -75,30 +75,50 @@ export function Header({ d, lang }: { d: Dict; lang: Lang }) {
   );
 }
 
+// Выпадающий список, а не три кнопки (просьба 2026-10-31). На <details>,
+// без JavaScript: на медленном канале язык переключается ещё до загрузки
+// скриптов. Закрытие по клику мимо и по Esc — в MenuCloser.
 export function LangSwitch({ lang, onDark }: { lang: Lang; onDark?: boolean }) {
+  const current = langs.find((l) => l.id === lang) ?? langs[0];
   return (
-    <div
-      className={`flex h-10 items-center rounded-full border p-0.5 text-xs font-semibold ${
-        onDark ? "border-white/40" : "border-border-strong bg-surface"
-      }`}
-    >
-      {langs.map((l) => {
-        const active = l.id === lang;
-        const tone = onDark
-          ? active ? "bg-white text-ink" : "text-white/80 hover:text-white"
-          : active ? "bg-ink text-white" : "text-muted hover:text-ink";
-        return (
-          <a
-            key={l.id}
-            href={l.href}
-            hrefLang={l.id}
-            aria-current={active ? "page" : undefined}
-            className={`flex h-full items-center rounded-full px-3 transition-colors ${tone}`}
-          >
-            {l.label}
-          </a>
-        );
-      })}
-    </div>
+    <details className="group relative" data-dropdown>
+      <summary
+        className={`flex h-10 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 text-sm font-semibold transition-colors ${
+          onDark
+            ? "border-white/40 text-white hover:border-white"
+            : "border-border-strong bg-surface text-text hover:border-ink"
+        }`}
+        aria-label={current.name}
+      >
+        <HugeiconsIcon icon={GlobeIcon} size={16} />
+        {current.label}
+        <HugeiconsIcon icon={ArrowDown01Icon} size={14} className="transition-transform group-open:rotate-180" />
+      </summary>
+      <ul
+        className={`absolute right-0 z-50 min-w-44 overflow-hidden rounded-md bg-surface py-1 shadow-lg ring-1 ring-border ${
+          onDark ? "bottom-12" : "top-12"
+        }`}
+      >
+        {langs.map((l) => {
+          const active = l.id === lang;
+          return (
+            <li key={l.id}>
+              <a
+                href={l.href}
+                hrefLang={l.id}
+                lang={l.id}
+                aria-current={active ? "page" : undefined}
+                className={`flex h-11 items-center justify-between gap-4 px-4 text-sm transition-colors ${
+                  active ? "font-semibold text-ink" : "text-text hover:bg-paper"
+                }`}
+              >
+                {l.name}
+                <span className="text-xs font-semibold text-faint">{l.label}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </details>
   );
 }

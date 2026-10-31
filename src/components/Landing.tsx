@@ -102,8 +102,10 @@ function President({ d }: { d: Dict }) {
   return (
     <section>
       <Container className="flex items-center gap-5 py-6 sm:gap-6">
-        <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-md bg-canvas sm:h-28 sm:w-24">
-          <Picture img={{ name: "president" }} alt={`${d.president.role} ${d.president.name}`} sizes="96px" />
+        {/* Рамка строго 2:3 — как сам портрет. Иначе кадр режется по
+            краям, а портрет главы государства обрезанным не показывают. */}
+        <div className="relative aspect-[2/3] w-24 shrink-0 overflow-hidden rounded-md bg-canvas sm:w-32">
+          <Picture img={{ name: "president" }} alt={`${d.president.role} ${d.president.name}`} sizes="128px" />
         </div>
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">{d.president.role}</p>
