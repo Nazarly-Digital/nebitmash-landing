@@ -69,7 +69,7 @@ export type Dict = {
     addressLabel: string;
     address: string[];
     phoneLabel: string;
-    faxLabel: string;
+    emailLabel: string;
   };
   footer: { illustrations: string; rights: string };
 };

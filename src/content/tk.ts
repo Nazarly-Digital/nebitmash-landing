@@ -37,7 +37,6 @@ export const tk: Dict = {
     { value: "1960", label: "ýyldan bäri önümçilik" },
     { value: "5", label: "önüm ugry" },
     { value: "35–220 kV", label: "elektrik liniýa diregleriniň synplary" },
-    { value: "3", label: "döwlet sargytçysy" },
   ],
   products: {
     eyebrow: "Önüm toplumy",
@@ -251,7 +250,7 @@ export const tk: Dict = {
     addressLabel: "Salgy",
     address: ["2008-nji (N. Pomma) köçesi, 6", "Aşgabat 744000", "Türkmenistan"],
     phoneLabel: "Telefon",
-    faxLabel: "Faks",
+    emailLabel: "Elektron poçta",
   },
   footer: {
     illustrations: "Önümleriň şekilleri berlen materiallar esasynda taýýarlanan görkezme suratlardyr, önümçilik çyzgylary däldir. Takyk gurluş tassyklanan resminamalar bilen kesgitlenýär.",

@@ -37,7 +37,6 @@ export const en: Dict = {
     { value: "1960", label: "manufacturing since" },
     { value: "5", label: "product directions" },
     { value: "35–220 kV", label: "transmission structure classes" },
-    { value: "3", label: "state customers" },
   ],
   products: {
     eyebrow: "Portfolio",
@@ -251,7 +250,7 @@ export const en: Dict = {
     addressLabel: "Address",
     address: ["6, 2008 (N. Pomma) Street", "Ashgabat 744000", "Turkmenistan"],
     phoneLabel: "Telephone",
-    faxLabel: "Fax",
+    emailLabel: "Email",
   },
   footer: {
     illustrations: "Product visuals are illustrative configurations based on supplied materials, not manufacturing drawings. Exact construction is governed by approved documentation.",

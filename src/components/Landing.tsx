@@ -1,5 +1,5 @@
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowRight02Icon, Call02Icon, Location01Icon, PrinterIcon } from "@hugeicons/core-free-icons";
+import { ArrowRight02Icon, Call02Icon, Location01Icon, Mail01Icon } from "@hugeicons/core-free-icons";
 import type { ReactNode } from "react";
 import { customerImages, customerKeys, future, groups, products, site } from "@/content/catalog";
 import { dicts } from "@/content";
@@ -79,13 +79,16 @@ function Hero({ d }: { d: Dict }) {
         </div>
       </Container>
       <Container>
-        <dl className="grid grid-cols-2 border-t border-border lg:grid-cols-4">
+        {/* Цифр три (строку «3 государственных заказчика» сняли по просьбе
+            предприятия 31.10.2026). На телефоне три колонки не влезают —
+            «35–220 kV» рвётся, поэтому две в ряд, третья на всю ширину. */}
+        <dl className="grid grid-cols-2 border-t border-border sm:grid-cols-3">
           {d.stats.map((s, i) => (
             <div
               key={s.label}
-              className={`py-6 ${i % 2 === 1 ? "border-l border-border pl-4 sm:pl-6" : "pr-4"} ${
-                i >= 2 ? "border-t border-border lg:border-t-0" : ""
-              } ${i === 2 ? "lg:border-l lg:pl-6" : ""} ${i > 0 ? "lg:pl-6" : ""}`}
+              className={`py-6 ${i === 0 ? "pr-4" : ""} ${i === 1 ? "border-l border-border pl-4 sm:pl-6" : ""} ${
+                i === 2 ? "col-span-2 border-t border-border sm:col-span-1 sm:border-l sm:border-t-0 sm:pl-6" : ""
+              }`}
             >
               <dt className="sr-only">{s.label}</dt>
               <dd className="text-3xl font-bold tabular-nums text-ink">{s.value}</dd>
@@ -316,8 +319,12 @@ function Contacts({ d }: { d: Dict }) {
               {site.phone.display}
             </a>
           </ContactRow>
-          <ContactRow icon={PrinterIcon} label={d.contacts.faxLabel}>
-            <span className="text-xl font-semibold tabular-nums text-text">{site.fax}</span>
+          <ContactRow icon={Mail01Icon} label={d.contacts.emailLabel}>
+            {site.emails.map((email) => (
+              <a key={email} href={`mailto:${email}`} className="block break-all text-lg font-semibold text-ink hover:underline">
+                {email}
+              </a>
+            ))}
           </ContactRow>
           <ContactRow icon={Location01Icon} label={d.contacts.addressLabel}>
             <address className="text-base not-italic leading-relaxed text-text">
@@ -348,7 +355,7 @@ function ContactRow({
       <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-tint text-ink">
         <HugeiconsIcon icon={icon} size={20} />
       </span>
-      <div>
+      <div className="min-w-0">
         <p className="text-xs font-semibold text-faint">{label}</p>
         <div className="mt-1">{children}</div>
       </div>
